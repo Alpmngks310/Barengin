@@ -1,0 +1,11 @@
+$kind: http-request
+name: ""
+url: http://127.0.0.1:8000/api/auth/register
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: ""
+order: 1000

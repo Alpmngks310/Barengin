@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 3a33ac8c-9f9f-4929-82ce-e5b309d646ce
+
+localResources:
+  collections:
+    - ../Barengin_Backend/docs/Barengin_API.postman_collection.json

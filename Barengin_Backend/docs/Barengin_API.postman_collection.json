@@ -1,0 +1,171 @@
+{
+  "info": {
+    "name": "Barengin API",
+    "description": "Local development collection for Barengin Laravel backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "activityId",
+      "value": "1"
+    },
+    {
+      "key": "joinRequestId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Categories",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/categories"
+      }
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Demo User\",\n  \"username\": \"demo_user\",\n  \"email\": \"demo@example.com\",\n  \"password\": \"StrongPass123\",\n  \"password_confirmation\": \"StrongPass123\",\n  \"adult_confirmed\": true,\n  \"terms_accepted\": true,\n  \"privacy_accepted\": true,\n  \"device_name\": \"Postman\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/register"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"demo@example.com\",\n  \"password\": \"StrongPass123\",\n  \"device_name\": \"Postman\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/login"
+      }
+    },
+    {
+      "name": "Me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/me"
+      }
+    },
+    {
+      "name": "Explore Activities",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/activities?city=Bandung&per_page=12"
+      }
+    },
+    {
+      "name": "Create Activity",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category_id\": 1,\n  \"title\": \"Badminton Weekend\",\n  \"description\": \"Main badminton santai untuk semua level.\",\n  \"participant_level\": \"all_levels\",\n  \"starts_at\": \"2026-12-12T01:00:00Z\",\n  \"ends_at\": \"2026-12-12T03:00:00Z\",\n  \"timezone\": \"Asia/Jakarta\",\n  \"venue_name\": \"GOR Example\",\n  \"address\": \"Jalan Example No. 1\",\n  \"area\": \"Dago\",\n  \"city\": \"Bandung\",\n  \"province\": \"Jawa Barat\",\n  \"country_code\": \"ID\",\n  \"capacity\": 8,\n  \"budget_amount\": 30000,\n  \"currency\": \"IDR\"\n}"
+        },
+        "url": "{{baseUrl}}/activities"
+      }
+    },
+    {
+      "name": "Publish Activity",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/activities/{{activityId}}/publish"
+      }
+    },
+    {
+      "name": "Create Join Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"message\":\"Saya tertarik bergabung.\"}"
+        },
+        "url": "{{baseUrl}}/activities/{{activityId}}/join-requests"
+      }
+    },
+    {
+      "name": "Decide Join Request",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\":\"accepted\",\"decision_note\":\"Sampai ketemu!\"}"
+        },
+        "url": "{{baseUrl}}/join-requests/{{joinRequestId}}/decision"
+      }
+    }
+  ]
+}
